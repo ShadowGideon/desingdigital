@@ -60,16 +60,24 @@
       list-style: none;
       padding: 0;
       font-size: 1.1em;
+      text-align: left;
+      max-width: 300px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     ul li {
       margin: 8px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: default;
     }
 
-    .btn-instagram {
+    .btn-instagram, .btn-copiar {
       background-color: #000;
       color: #fff;
-      padding: 15px 30px;
+      padding: 12px 25px;
       border: none;
       border-radius: 8px;
       cursor: pointer;
@@ -77,11 +85,41 @@
       transition: 0.3s;
       text-decoration: none;
       display: inline-block;
-      margin-top: 20px;
+      margin-top: 10px;
     }
 
-    .btn-instagram:hover {
+    .btn-instagram:hover, .btn-copiar:hover {
       background-color: #333;
+    }
+
+    .pix-box {
+      background-color: #f9f9f9;
+      border-radius: 10px;
+      padding: 10px;
+      margin-top: 10px;
+      border: 1px solid #e7abb2;
+      font-size: 1.1em;
+      display: none;
+      text-align: left;
+      max-width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .toggle-icon {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border-left: 2px solid #000;
+      border-bottom: 2px solid #000;
+      transform: rotate(-45deg);
+      margin-left: 8px;
+      transition: transform 0.2s ease;
+      cursor: pointer;
+    }
+
+    .rotate {
+      transform: rotate(45deg);
     }
 
     footer {
@@ -119,6 +157,26 @@
   </section>
 
   <section>
+    <h2>💳 Formas de Pagamento</h2>
+    <ul>
+      <li>✔️ Dinheiro físico</li>
+      <li>
+        ✔️ Pix 
+        <span class="toggle-icon" id="pixToggle"></span>
+      </li>
+    </ul>
+
+    <div class="pix-box" id="pixInfo">
+      <strong>Nome:</strong> Daysa Nicoly<br>
+      <strong>Banco:</strong> Banco Inter<br>
+      <strong>Pix:</strong> 16818089437
+    </div>
+
+    <button class="btn-copiar" onclick="copiarPix()">Copiar chave Pix</button>
+    <p id="mensagem" style="color:green; display:none; margin-top:10px;">✅ Chave Pix copiada!</p>
+  </section>
+
+  <section>
     <h2>📩 Fale Conosco</h2>
     <p>Envie uma mensagem e será redirecionado para o Instagram da loja:</p>
     <a href="https://www.instagram.com/desing.digital18" target="_blank" class="btn-instagram">Mandar mensagem</a>
@@ -127,6 +185,29 @@
   <footer>
     © 2025 Design Digital — Todos os direitos reservados
   </footer>
+
+  <script>
+    const pixToggle = document.getElementById("pixToggle");
+    const pixInfo = document.getElementById("pixInfo");
+
+    pixToggle.addEventListener("click", () => {
+      if (pixInfo.style.display === "none") {
+        pixInfo.style.display = "block";
+        pixToggle.classList.add("rotate");
+      } else {
+        pixInfo.style.display = "none";
+        pixToggle.classList.remove("rotate");
+      }
+    });
+
+    function copiarPix() {
+      const chavePix = "16818089437";
+      navigator.clipboard.writeText(chavePix);
+      const msg = document.getElementById("mensagem");
+      msg.style.display = "block";
+      setTimeout(() => { msg.style.display = "none"; }, 2500);
+    }
+  </script>
 
 </body>
 </html>
